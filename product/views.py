@@ -1,23 +1,27 @@
+from lib2to3.refactor import MultiprocessRefactoringTool
+from unittest import result
 from django.http   import JsonResponse
 from django.views  import View
 
 from core.utils      import login_decorator
-from product.models  import Product,Productoption
-
-
+from product.models  import *
 
 class PerfumeView(View):
     def get(self, request):
-        results=[]
-        for products in Productoption.objects.all():
-            results.append(
-                {
-                "id" :  products.product.id,
-                "name" : products.product.name,
-                "image_url" : products.image_url,
-                "addtional_name" : products.addtional_name,
-                }
-            )
-        return JsonResponse({'result':results}, status=200)
-
-
+        # main_category = MainCategory.objects.get(id=4)
+        perfume=[{
+        "id"                 : product.id,
+        "name"               : product.name, 
+        "additional_content" : product.additional_content,
+        "image_url" : [
+                    {
+                        'id'   : .id,
+                        'name' : .name
+                    } 
+                ] 
+        } for product in Product.objects.get(id=4)]
+        
+        
+        return JsonResponse({'perfume':perfume}, status=200)
+    
+ 
