@@ -36,7 +36,7 @@ class Product(TimeStampModel):
     name                 = models.CharField(max_length = 50)
     content              = models.TextField()
     additional_image_url = models.URLField()
-    additional_name      = models.CharField(max_length = 50,null=True)
+    additional_name      = models.CharField(max_length = 200,null=True)
     additional_content   = models.TextField(null=True)
     
     class Meta:
